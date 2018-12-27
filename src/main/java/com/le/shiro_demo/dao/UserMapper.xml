@@ -7,6 +7,6 @@
       select * from user_info
     </select>
     <select id="getUserByName" resultType="com.le.shiro_demo.model.User">
-        select * from user_info where user_name = #{name}
+        select * from user_info where name = #{name}
     </select>
 </mapper>

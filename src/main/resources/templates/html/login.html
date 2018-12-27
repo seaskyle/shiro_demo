@@ -10,10 +10,10 @@
 </head>
 <body>
 <div class="container">
-    <form class="form-signin" action="/login" method="post">
+    <form id="login-form" class="form-signin" action="/doLogin" method="post">
         <h2 class="form-signin-heading">用户登录</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" id="inputEmail" name="userName" class="form-control" placeholder="User name" required autofocus>
+        <input type="text" id="inputEmail" name="name" class="form-control" placeholder="User name" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
@@ -26,7 +26,13 @@
 </div>
 </body>
 </html>
+<script type="javascript">
 
+    function login() {
+        var m = $('#login-form').serialize();
+        console.log(m);
+    }
+</script>
 <style>
     body {
         padding-top: 40px;
