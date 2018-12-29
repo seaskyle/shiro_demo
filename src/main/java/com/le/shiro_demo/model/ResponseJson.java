@@ -1,7 +1,7 @@
 package com.le.shiro_demo.model;
 
 public class ResponseJson {
-    private Integer status;
+        private Integer status;
     private String message;
     private Object data;
 

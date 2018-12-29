@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="${ctx}/bootstrap/css/bootstrap.min.css">
     <script src="${ctx}/bootstrap/js/jquery.min.js"></script>
     <script src="${ctx}/bootstrap/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
+    <div id="error" class="alert alert-danger pull-right" role="alert" style="display: none;margin-right: 50px;"></div>
     <form id="login-form" class="form-signin" action="/doLogin" method="post">
         <h2 class="form-signin-heading">用户登录</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
@@ -21,18 +23,30 @@
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="$.login.doLogin()">Sign in</button>
     </form>
 </div>
 </body>
-</html>
-<script type="javascript">
-
-    function login() {
+<script>
+$.login = {
+    doLogin : function () {
         var m = $('#login-form').serialize();
         console.log(m);
+        $.post("/doLogin", $('#login-form').serialize(),function (result) {
+            debugger;
+            if (result != null && result.status == 200) {
+                location = "/index";
+            } else {
+                $('#error').html("");
+                $('#error').html(result.message).fadeIn(400);
+                $('#error').delay(1000).fadeOut(400);
+            }
+        })
     }
+}
 </script>
+</html>
+
 <style>
     body {
         padding-top: 40px;
