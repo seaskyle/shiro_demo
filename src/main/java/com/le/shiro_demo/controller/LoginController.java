@@ -7,22 +7,27 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
     @PostMapping("/doLogin")
-    @ResponseBody
-    public ResponseJson doLogin(User tokenUser) {
+    public ModelAndView doLogin(User tokenUser) {
         Subject subject = SecurityUtils.getSubject();
+        ModelAndView mv = new ModelAndView();
         try {
             subject.login(new UsernamePasswordToken(tokenUser.getName(), tokenUser.getPassword()));
         } catch (AuthenticationException e) {
-            return ResponseJson.error(401, "认证失败！");
+            mv.setViewName("/login");
+            mv.addObject("message", "认证失败");
+            return mv;
         }
-        return ResponseJson.ok("认证通过！");
+        mv.setViewName("/index");
+        return mv;
     }
 
     @GetMapping("/login")
