@@ -31,7 +31,7 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean() {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
-        factoryBean.setLoginUrl("/login");
+        factoryBean.setLoginUrl("/html/login");
         factoryBean.setSecurityManager(defaultWebSecurityManager());
         HashMap<String, Filter> filters = new HashMap<>();
         filters.put("MyPermissionFilter", new MyPermissionFilter());

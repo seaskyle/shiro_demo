@@ -6,7 +6,24 @@
     <select id="getAll" resultType="com.le.shiro_demo.model.User">
       select * from user_info
     </select>
-    <select id="getUserByName" resultType="com.le.shiro_demo.model.User">
-        select * from user_info where name = #{name}
+    <select id="getUserByName" resultMap="user_info">
+        SELECT * from user_info ui
+                join user_role ur on ui.user_id = ur.user_id and ui.user_name = "admin"
+            join role r on ur.role_id = r.role_id
+            join role_permission rp on r.role_id = rp.role_id
+            join resource rs on rp.resource_id = rs.resource_id
+            join permission p on rp.permission_id = p.permission_id
     </select>
+    <resultMap id="user_info" type="com.le.shiro_demo.model.User" autoMapping="true">
+        <id column="user_id" property="userId"/>
+        <collection property="roles" ofType="com.le.shiro_demo.model.Role" autoMapping="true">
+            <id column="role_id" property="roleId"/>
+        </collection>
+        <collection property="resources" ofType="com.le.shiro_demo.model.Resource" autoMapping="true">
+            <id column="resource_id" property="resourceId"/>
+            <collection property="permissions" ofType="com.le.shiro_demo.model.Permission" autoMapping="true">
+                <id column="permission_id" property="permissionId"/>
+            </collection>
+        </collection>
+    </resultMap>
 </mapper>

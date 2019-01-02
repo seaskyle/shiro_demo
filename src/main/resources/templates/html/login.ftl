@@ -39,7 +39,7 @@
                          <div>${message}</div>
                       </#if>
                     <div class="form-group">
-                      <input type="text" class="form-control" name="name" value="admin" placeholder="Enter Username">
+                      <input type="text" class="form-control" name="userName" value="admin" placeholder="Enter Username">
                     </div>  
                     <div class="form-group">
                       <input class="form-control" type="password" value="admin" name="password">

@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     UserService userService;
     @ResponseBody
-    @GetMapping("/")
+    @GetMapping()
     public List<User> getAll() {
         return userService.getAll();
     }

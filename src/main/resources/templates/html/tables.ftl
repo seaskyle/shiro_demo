@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html>
-
+<#assign base=request.contextPath />
 <head>
     
     <meta charset="utf-8">
